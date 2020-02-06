@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BallController.cs" />
+     <Compile Include="Assets\Scripts\CameraView.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Mac McKay/Documents/G310-GameProduction/McKay_RollABall/McKay_RollABall/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
