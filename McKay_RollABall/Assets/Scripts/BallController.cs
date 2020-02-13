@@ -8,11 +8,12 @@ public class BallController : MonoBehaviour
     public float speed;
     public Text countText;
     public Text winText;
-    public float jumpHeight;
+    public Vector3 jump;
+    public float jumpHeight = 2.0f;
 
     private Rigidbody rb;
     private int count;
-    private Boolean onGround;
+    private bool onGround;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +23,13 @@ public class BallController : MonoBehaviour
         SetCountText();
         winText.text = "";
         onGround = true;
+        jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //moves the ball 
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -34,14 +37,18 @@ public class BallController : MonoBehaviour
 
         rb.AddForce(movement * speed);
 
-        if(onGround.equals(true) && Input.GetKeyDown(KeyCode.Space)){
-            Jump();
+        //checks to see if the ball is on the ground and if true then the ball can jump
+        if(onGround == true && Input.GetKeyDown(KeyCode.Space)){
+            rb.AddForce(jump * jumpHeight, ForceMode.Impulse);
+            onGround = false; 
+            
         }
     }
 
-    void Jump(){
-        
-    }
+    void OnCollisionStay()
+         {
+             onGround = true;
+         }
 
 
 
@@ -51,6 +58,10 @@ public class BallController : MonoBehaviour
             other.gameObject.SetActive(false);
             count++;
             SetCountText();
+        }
+
+        if(other.gameObject.CompareTag("Booster")){
+            rb.velocity = rb.velocity * 6f;
         }
     }
 

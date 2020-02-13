@@ -2112,9 +2112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d61be224509874e85789a033acfe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 0
   countText: {fileID: 526970639}
   winText: {fileID: 1056875049}
+  jumpHeight: 0
 --- !u!1001 &1810399869
 PrefabInstance:
   m_ObjectHideFlags: 0
