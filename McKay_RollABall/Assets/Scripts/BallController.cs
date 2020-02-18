@@ -14,7 +14,7 @@ public class BallController : MonoBehaviour
 
     private Rigidbody rb;
     private int count;
-    private float jump = 5.0f;
+    private float jump = 4.0f;
     
 
     // Start is called before the first frame update
@@ -72,7 +72,7 @@ public class BallController : MonoBehaviour
 
     void SetCountText(){
         countText.text = "Count: " + count.ToString();
-        if(count >= 22){
+        if(count >= 36){
             winText.text = "You Win!";
         }
     }
