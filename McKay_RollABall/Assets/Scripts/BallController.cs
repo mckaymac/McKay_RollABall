@@ -8,22 +8,23 @@ public class BallController : MonoBehaviour
     public float speed;
     public Text countText;
     public Text winText;
-
-    public GameObject Player;
+    public SphereCollider col;
+    public LayerMask groundLayers;
     
 
     private Rigidbody rb;
     private int count;
-    private bool onGround;
+    private float jump = 5.0f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<SphereCollider>();
         count = 0;
         SetCountText();
         winText.text = "";
-        onGround = true;
     }
 
     // Update is called once per frame
@@ -34,26 +35,22 @@ public class BallController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        Vector3 jump = new Vector3(moveHorizontal, 2.0f, moveVertical);
 
         rb.AddForce(movement * speed);
 
         //checks to see if the ball is on the ground and if true then the ball can jump
-        if(onGround == true && Input.GetKeyDown(KeyCode.Space)){
-
-            
-            onGround = false; 
+        if(IsGrounded() && Input.GetKeyDown(KeyCode.Space)){
+            //onGround = false; 
+            rb.AddForce(Vector3.up*jump, ForceMode.Impulse); 
             
         }
     }
 
-    
+    private bool IsGrounded(){
+        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y,
+         col.bounds.center.z), col.radius*0.9f, groundLayers);
 
-    void OnCollisionStay()
-         {
-             onGround = true;
-         }
-
+    }
 
 
     void OnTriggerEnter(Collider other){
@@ -65,10 +62,10 @@ public class BallController : MonoBehaviour
         }
 
         if(other.gameObject.CompareTag("Booster")){
-            rb.velocity = rb.velocity * 6f;
+            rb.velocity = rb.velocity * 2f;
         }
 
-        if(other.gameObject.CompareTag("Obstacle")){
+        if(other.gameObject.CompareTag("Obstacle") || (transform.position.y < -5.0f)){
             transform.position = new Vector3(0,0.5f,0);
         }
     }

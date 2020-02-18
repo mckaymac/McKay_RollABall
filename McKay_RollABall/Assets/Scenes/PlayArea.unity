@@ -2228,7 +2228,7 @@ GameObject:
   - component: {fileID: 1714966635}
   - component: {fileID: 1714966636}
   - component: {fileID: 1714966637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2339,7 +2339,10 @@ MonoBehaviour:
   speed: 10
   countText: {fileID: 526970639}
   winText: {fileID: 1056875049}
-  Player: {fileID: 0}
+  col: {fileID: 1714966631}
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!95 &1714966637
 Animator:
   serializedVersion: 3
@@ -2703,7 +2706,7 @@ PrefabInstance:
     - target: {fileID: 7384326281007999478, guid: 3d93d75fcbba9ea49a24ff983e8a5b75,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9648418
+      value: -3.81
       objectReference: {fileID: 0}
     - target: {fileID: 7384326281007999478, guid: 3d93d75fcbba9ea49a24ff983e8a5b75,
         type: 3}
