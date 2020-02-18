@@ -8,8 +8,7 @@ public class BallController : MonoBehaviour
     public float speed;
     public Text countText;
     public Text winText;
-    public Vector3 jump;
-    public float jumpHeight = 2.0f;
+    
 
     private Rigidbody rb;
     private int count;
@@ -23,7 +22,6 @@ public class BallController : MonoBehaviour
         SetCountText();
         winText.text = "";
         onGround = true;
-        jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -34,16 +32,20 @@ public class BallController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        Vector3 jump = new Vector3(moveHorizontal, 2.0f, moveVertical);
 
         rb.AddForce(movement * speed);
 
         //checks to see if the ball is on the ground and if true then the ball can jump
         if(onGround == true && Input.GetKeyDown(KeyCode.Space)){
-            rb.AddForce(jump * jumpHeight, ForceMode.Impulse);
+
+            
             onGround = false; 
             
         }
     }
+
+    
 
     void OnCollisionStay()
          {
