@@ -8,6 +8,8 @@ public class BallController : MonoBehaviour
     public float speed;
     public Text countText;
     public Text winText;
+
+    public GameObject Player;
     
 
     private Rigidbody rb;
@@ -64,6 +66,10 @@ public class BallController : MonoBehaviour
 
         if(other.gameObject.CompareTag("Booster")){
             rb.velocity = rb.velocity * 6f;
+        }
+
+        if(other.gameObject.CompareTag("Obstacle")){
+            transform.position = new Vector3(0,0.5f,0);
         }
     }
 
