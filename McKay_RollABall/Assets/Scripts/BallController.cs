@@ -46,6 +46,7 @@ public class BallController : MonoBehaviour
         }
     }
 
+    //Checks to see if the ball is on the ground
     private bool IsGrounded(){
         return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y,
          col.bounds.center.z), col.radius*0.9f, groundLayers);
@@ -55,17 +56,20 @@ public class BallController : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
 
+        //Picks up the collectables and adds one to the count
         if(other.gameObject.CompareTag("PickUp")){
             other.gameObject.SetActive(false);
             count++;
             SetCountText();
         }
 
+        //Boosts the player's speed when they go over a boost pad
         if(other.gameObject.CompareTag("Booster")){
             rb.velocity = rb.velocity * 2f;
         }
 
-        if(other.gameObject.CompareTag("Obstacle") || (transform.position.y < -5.0f)){
+        //Sends the player back to the start when they touch an obstacle or the player fall 5 units below the origin
+        if((other.gameObject.CompareTag("Obstacle")) || (transform.position.y < -5.0f)){
             transform.position = new Vector3(0,0.5f,0);
         }
     }
