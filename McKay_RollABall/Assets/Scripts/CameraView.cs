@@ -11,6 +11,7 @@ public class CameraView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Sets the distance between the player and the camera
         offset = transform.position - Player.transform.position;
         
     }
@@ -18,6 +19,7 @@ public class CameraView : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        //The camera follows the the player
         transform.position = Player.transform.position + offset;
         
     }
