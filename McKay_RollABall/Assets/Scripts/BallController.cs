@@ -8,6 +8,7 @@ public class BallController : MonoBehaviour
     public float speed;
     public Text countText;
     public Text winText;
+    public Text tutorialText;
     public SphereCollider col;
     public LayerMask groundLayers;
     
@@ -72,12 +73,25 @@ public class BallController : MonoBehaviour
         if((other.gameObject.CompareTag("Obstacle")) || (transform.position.y < -5.0f)){
             transform.position = new Vector3(0,0.5f,0);
         }
+
+        //If the player is in the spawn area then text appears showing the controls
+        if(other.gameObject.CompareTag("Tutorial")){
+            tutorialText.text = "WASD or arrow keys to move, SPACE to jump";
+
+        }
+
+        //When the player leaves the spawn spot then the tutorial text disapears
+        if(other.gameObject.CompareTag("EndTut")){
+            tutorialText.text = "";
+        }
     }
 
+    //Updates the counter in real time and tells you when you win
     void SetCountText(){
         countText.text = "Count: " + count.ToString();
         if(count >= 36){
             winText.text = "You Win!";
         }
     }
+
 }
